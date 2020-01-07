@@ -23,9 +23,6 @@ public class ServiceService {
   @EJB
   CarDaoBean carDaoBean;
 
-  @EJB
-  CarDtoMapper carDtoMapper;
-
   public List<ServiceDto> findServiceByCarId(Long id) {
     List<Service> serviceList = serviceDaoBean.findServiceByCarId(id);
     List<ServiceDto> serviceDtoList = new ArrayList<>();
@@ -40,6 +37,6 @@ public class ServiceService {
     service.setCars(carDaoBean.findCarById(carId));
     service.setFixes(fixes);
     service.setMileage(mileage);
-
+    serviceDaoBean.saveService(service);
   }
 }

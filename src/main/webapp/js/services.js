@@ -4,6 +4,6 @@ function singleService(car){
 function carList(){
   location.replace("/services");
 }
-function addService(car) {
+function addNewService(car) {
   location.replace("/service-add?id=" + car);
 }

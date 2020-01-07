@@ -2,7 +2,7 @@
 <div class="container-fluid" style="background-color: #D6D7D7; min-height: 700px">
   <div class="row">
     <button class="btn btn-danger" style="height: 50px; margin-top: 30px; margin-left: 2%" onclick="carList()"> Powrót do listy </button>
-    <button class="btn btn-success" style="height: 50px; margin-top: 30px; margin-left: 2%" onclick="addService(${car.id})"> Dodaj serwis </button>
+    <button class="btn btn-success" style="height: 50px; margin-top: 30px; margin-left: 2%" onclick="addNewService(${car.id})"> Dodaj serwis </button>
     <h1 style="margin-top: 30px; margin-left: 17%">
          <#if car.registrationNumber??> ${car.registrationNumber} </#if> ${car.brandDto.name} ${car.modelDto.name}
     </h1>

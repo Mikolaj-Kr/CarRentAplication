@@ -13,11 +13,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.ServiceService;
 
 @WebServlet("/service-add")
 public class ServiceAddNewServlet extends HttpServlet {
+
   @Inject
   TemplateProvider templateProvider;
+
+  @Inject
+  ServiceService serviceService;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -28,9 +33,14 @@ public class ServiceAddNewServlet extends HttpServlet {
 
     String position = (String) req.getSession().getAttribute("type");
 
+    String id = req.getParameter("id");
+
+    req.getSession().setAttribute("id", id);
+
     Map<String,Object> dataModel = new HashMap<>();
 
     dataModel.put("type", position);
+    dataModel.put("id", id);
 
     try {
       template.process(dataModel, printWriter);
@@ -42,6 +52,18 @@ public class ServiceAddNewServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    PrintWriter printWriter = resp.getWriter();
     String mileage = req.getParameter("mileage");
+    String id = (String) req.getSession().getAttribute("id");
+    serviceService.addService(Long.parseLong(mileage), Long.parseLong(id), "kupa");
+    req.getSession().setAttribute("id",null);
+    Template template = templateProvider.getTemplate(getServletContext(),("services-select-car.ftlh"));
+    Map<String, Object> dataModel = new HashMap<>();
+    try {
+      template.process(dataModel,printWriter);
+    } catch (TemplateException e) {
+      e.printStackTrace();
+    }
+
   }
 }
