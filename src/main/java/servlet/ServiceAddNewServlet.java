@@ -35,8 +35,6 @@ public class ServiceAddNewServlet extends HttpServlet {
 
     String id = req.getParameter("id");
 
-    req.getSession().setAttribute("id", id);
-
     Map<String,Object> dataModel = new HashMap<>();
 
     dataModel.put("type", position);
@@ -52,12 +50,10 @@ public class ServiceAddNewServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    PrintWriter printWriter = resp.getWriter();
     String mileage = req.getParameter("mileage");
     String fixes = req.getParameter("fixes");
-    String id = (String) req.getSession().getAttribute("id");
+    String id = req.getParameter("car-service");
     serviceService.addService(Long.parseLong(mileage), Long.parseLong(id), fixes);
-    req.getSession().setAttribute("id",null);
     resp.sendRedirect("/service-view?id=" + id);
   }
 }

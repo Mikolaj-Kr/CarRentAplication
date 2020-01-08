@@ -14,7 +14,7 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "Service.findServiceByCar",
         query = "SELECT s FROM Service s WHERE s.cars.id=?1"
-    ),
+    )
 })
 @Entity
 @Table(name = "service")

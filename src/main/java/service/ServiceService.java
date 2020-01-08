@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import mapper.CarDtoMapper;
 import mapper.ServiceDtoMapper;
 
 @Stateless
@@ -32,11 +31,23 @@ public class ServiceService {
     return serviceDtoList;
   }
 
-  public void addService(Long mileage, Long carId, String fixes){
+  public void addService(Long mileage, Long carId, String fixes) {
     Service service = new Service();
     service.setCars(carDaoBean.findCarById(carId));
     service.setFixes(fixes);
     service.setMileage(mileage);
     serviceDaoBean.saveService(service);
+  }
+
+  public Service findServiceById(Long id) {
+    return serviceDaoBean.findServiceById(id);
+  }
+
+  public void deleteService(Service service) {
+    serviceDaoBean.deleteService(service);
+  }
+
+  public Long findCarIdByServiceId (Long id){
+    return serviceDtoMapper.mapServiceToDto(serviceDaoBean.findServiceById(id)).getCarDto().getId();
   }
 }

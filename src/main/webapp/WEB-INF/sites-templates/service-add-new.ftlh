@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-     <a href="/services"><button type="submit" id="car-service" class="btn btn-primary">Dodaj</button></a>
+     <button type="submit" name="car-service" value="${id}" id="car-service" class="btn btn-primary">Dodaj</button>
     </div>
   </div>
 </form>

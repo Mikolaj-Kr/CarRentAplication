@@ -30,10 +30,6 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "Cars.findCarsByBrands",
         query = "SELECT c FROM Car c  INNER JOIN c.brand b WHERE b.name = :name"
-    ),
-    @NamedQuery(
-        name = "Cars.findCarsByModel",
-        query = "SELECT c FROM Car c  INNER JOIN c.model m WHERE m.name = :name"
     )
 })
 
@@ -65,7 +61,6 @@ public class Car {
   Model model;
 
   @OneToMany(mappedBy = "cars")
-
   List<Service> services = new ArrayList<>();
 
   public Car() {
