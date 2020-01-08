@@ -7,10 +7,13 @@
     <div class="col-md-12">
       <input id="mileage" name="mileage" type="number" class="form-control" placeholder="przebieg">
     </div>
+    <div class="col-md-12">
+      <input id="fixes" name="fixes" type="text" class="form-control" placeholder="naprawy">
+    </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <button type="submit" id="car-service" class="btn btn-primary">Dodaj</button>
+     <a href="/services"><button type="submit" id="car-service" class="btn btn-primary">Dodaj</button></a>
     </div>
   </div>
 </form>

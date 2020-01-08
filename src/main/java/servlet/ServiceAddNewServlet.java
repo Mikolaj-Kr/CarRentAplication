@@ -54,16 +54,10 @@ public class ServiceAddNewServlet extends HttpServlet {
       throws ServletException, IOException {
     PrintWriter printWriter = resp.getWriter();
     String mileage = req.getParameter("mileage");
+    String fixes = req.getParameter("fixes");
     String id = (String) req.getSession().getAttribute("id");
-    serviceService.addService(Long.parseLong(mileage), Long.parseLong(id), "kupa");
+    serviceService.addService(Long.parseLong(mileage), Long.parseLong(id), fixes);
     req.getSession().setAttribute("id",null);
-    Template template = templateProvider.getTemplate(getServletContext(),("services-select-car.ftlh"));
-    Map<String, Object> dataModel = new HashMap<>();
-    try {
-      template.process(dataModel,printWriter);
-    } catch (TemplateException e) {
-      e.printStackTrace();
-    }
-
+    resp.sendRedirect("/service-view?id=" + id);
   }
 }
