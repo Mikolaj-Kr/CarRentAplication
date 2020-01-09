@@ -44,4 +44,10 @@ public class CarDaoBean {
     query.setParameter("name", name);
     return query.getResultList();
   }
+
+  public Car findCarByServiceId(Long id){
+    Query query = entityManager.createNamedQuery("Cars.findCarByServiceId");
+    query.setParameter("id", id);
+    return (Car) query.getSingleResult();
+  }
 }

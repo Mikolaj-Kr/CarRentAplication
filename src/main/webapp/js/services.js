@@ -7,3 +7,7 @@ function carList(){
 function addNewService(car) {
   location.replace("/service-add?id=" + car);
 }
+function serviceEdit(id) {
+  location.replace("service-edit?id=" + id);
+
+}

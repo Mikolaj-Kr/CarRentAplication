@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import mapper.ServiceDtoMapper;
+import mapper.reverseMapper.ServiceMapper;
 
 @Stateless
 public class ServiceService {
@@ -21,6 +22,9 @@ public class ServiceService {
 
   @EJB
   CarDaoBean carDaoBean;
+
+  @EJB
+  ServiceMapper serviceMapper;
 
   public List<ServiceDto> findServiceByCarId(Long id) {
     List<Service> serviceList = serviceDaoBean.findServiceByCarId(id);
@@ -49,5 +53,10 @@ public class ServiceService {
 
   public Long findCarIdByServiceId (Long id){
     return serviceDtoMapper.mapServiceToDto(serviceDaoBean.findServiceById(id)).getCarDto().getId();
+  }
+
+  public void editService (Service service){
+    ServiceDto serviceDto = serviceDtoMapper.mapServiceToDto(service);
+    serviceDaoBean.editService(serviceMapper.mapService(serviceDto));
   }
 }

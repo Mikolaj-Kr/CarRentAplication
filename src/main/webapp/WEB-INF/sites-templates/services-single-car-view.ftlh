@@ -30,11 +30,9 @@
                   <form action="/service-view" method="post">
                     <button name="delete" value="${service.id}" class="btn btn-danger"> Usuń </button>
                   </form>
-                  <form action="/service-view" method="post">
-                    <button name="edit" value="${service.id}" class="btn btn-primary" disabled>
+                    <button name="edit" onclick="serviceEdit(${service.id})" class="btn btn-primary">
                       Edytuj
                     </button>
-                  </form>
                 </td>
               </tr>
             </#list>

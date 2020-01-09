@@ -17,6 +17,8 @@ public class ServiceDaoBean {
     entityManager.persist(service);
   }
 
+  public void editService(Service service){entityManager.merge(service);}
+
   public void deleteService(Service service) {
     entityManager.remove(entityManager.contains(service) ? service : entityManager.merge(service));
   }
