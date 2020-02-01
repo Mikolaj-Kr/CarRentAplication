@@ -13,17 +13,23 @@ public class ServiceDaoBean {
   @PersistenceContext
   private EntityManager entityManager;
 
-  public  void saveService (Service service){
+  public void saveService(Service service) {
     entityManager.persist(service);
   }
 
-  public Service findServiceById(Long id){return entityManager.find(Service.class, id);
+  public void editService(Service service){entityManager.merge(service);}
+
+  public void deleteService(Service service) {
+    entityManager.remove(entityManager.contains(service) ? service : entityManager.merge(service));
   }
 
-  public List<Service> findServiceByCarId(Long id){
-    Query query = entityManager.createNamedQuery("Service.findServiceByCar");
-    query.setParameter(1,id);
+  public Service findServiceById(Long id) {
+    return entityManager.find(Service.class, id);
+  }
 
-  return query.getResultList();
+  public List<Service> findServiceByCarId(Long id) {
+    Query query = entityManager.createNamedQuery("Service.findServiceByCar");
+    query.setParameter(1, id);
+    return query.getResultList();
   }
 }

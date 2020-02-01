@@ -30,8 +30,6 @@ public class ServiceSingleCarServlet extends HttpServlet {
   @Inject
   ServiceService serviceService;
 
-
-
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -59,7 +57,14 @@ public class ServiceSingleCarServlet extends HttpServlet {
     } catch (TemplateException e) {
       e.printStackTrace();
     }
+  }
 
-
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    String delete = req.getParameter("delete");
+    Long carId = serviceService.findCarIdByServiceId(Long.parseLong(delete));
+    serviceService.deleteService(serviceService.findServiceById(Long.parseLong(delete)));
+    resp.sendRedirect("/service-view?id=" + carId);
   }
 }

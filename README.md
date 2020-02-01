@@ -77,9 +77,7 @@ By logging in, the user is checked the authorization level and access to individ
 * HTML5, CSS3, JS
 * jQuery, AJAX
 
-## Status
-Project is: _finished_.
+
 
 ## Inspiration
-Own idea.
-
+Work in car rent company. 

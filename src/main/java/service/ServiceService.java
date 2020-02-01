@@ -1,5 +1,6 @@
 package service;
 
+import dao.CarDaoBean;
 import dao.ServiceDaoBean;
 import dto.ServiceDto;
 import entity.Service;
@@ -8,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import mapper.ServiceDtoMapper;
+import mapper.reverseMapper.ServiceMapper;
 
 @Stateless
 public class ServiceService {
@@ -18,14 +20,43 @@ public class ServiceService {
   @EJB
   ServiceDtoMapper serviceDtoMapper;
 
-  public List<ServiceDto> findServiceByCarId(Long id){
+  @EJB
+  CarDaoBean carDaoBean;
+
+  @EJB
+  ServiceMapper serviceMapper;
+
+  public List<ServiceDto> findServiceByCarId(Long id) {
     List<Service> serviceList = serviceDaoBean.findServiceByCarId(id);
     List<ServiceDto> serviceDtoList = new ArrayList<>();
     for (Service service : serviceList) {
       serviceDtoList.add(serviceDtoMapper.mapServiceToDto(service));
     }
     return serviceDtoList;
-    }
+  }
 
+  public void addService(Long mileage, Long carId, String fixes) {
+    Service service = new Service();
+    service.setCars(carDaoBean.findCarById(carId));
+    service.setFixes(fixes);
+    service.setMileage(mileage);
+    serviceDaoBean.saveService(service);
+  }
 
+  public Service findServiceById(Long id) {
+    return serviceDaoBean.findServiceById(id);
+  }
+
+  public void deleteService(Service service) {
+    serviceDaoBean.deleteService(service);
+  }
+
+  public Long findCarIdByServiceId (Long id){
+    return serviceDtoMapper.mapServiceToDto(serviceDaoBean.findServiceById(id)).getCarDto().getId();
+  }
+
+  public void editService (Service service){
+    ServiceDto serviceDto = serviceDtoMapper.mapServiceToDto(service);
+    serviceDaoBean.editService(serviceMapper.mapService(serviceDto));
+  }
 }
