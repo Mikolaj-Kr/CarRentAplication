@@ -34,6 +34,10 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "Cars.findCarByServiceId",
         query = "SELECT c FROM Car c INNER JOIN c.services s WHERE s.id = :id"
+    ),
+    @NamedQuery(
+        name = "Cars.findCarsByModel",
+        query = "SELECT c FROM Car c  INNER JOIN c.model b WHERE b.name = :name"
     )
 })
 
